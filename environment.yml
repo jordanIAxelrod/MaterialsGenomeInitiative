@@ -10,4 +10,5 @@ dependencies:
   - ipykernel
   - pandas
   - scikit-learn
+  - nltk
 prefix: /home/ldtcoop/miniconda3/envs/pollydarton
