@@ -1,0 +1,14 @@
+name: pollydarton
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - torchaudio
+  - pytorch
+  - torchvision
+  - pytorch-cuda=11.7
+  - ipykernel
+  - pandas
+  - scikit-learn
+  - nltk
+prefix: /home/ldtcoop/miniconda3/envs/pollydarton
