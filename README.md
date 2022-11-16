@@ -6,4 +6,21 @@ This repo is for a joint project between [Jordan Axelrod](https://github.com/jor
 
 You can install the required packages by running `conda env create -n pollydarton --file --from-history>environment.yml`.
 
-**NB:** Due to permissions concerns the `/data` directory is empty. You will want to populate it with data during the installation process.
+**NB:** Due to permissions concerns the `/data` directory is empty. You will want to populate it with data during the installation process. It should look like this:
+
+```
+MaterialsGenomeInitiative
+│
+└───data
+│   │
+│   └───raw
+│       │   action.txt
+│       │   constituent.txt
+│       │   null.txt
+│       │   property.txt
+...
+|   README.md
+|   split-data.py
+```
+
+The code in `split-data.py` will (deterministically) turn this raw data into a pair of TSV files (one for training, one for testing) which can be used. 
