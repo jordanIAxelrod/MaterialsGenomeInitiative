@@ -11,4 +11,5 @@ dependencies:
   - pandas
   - scikit-learn
   - nltk
+  - torchtext
 prefix: /home/ldtcoop/miniconda3/envs/pollydarton
