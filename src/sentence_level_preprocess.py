@@ -30,3 +30,22 @@ def rm_linebreaks(text: str, p=False) -> str:
         print("after :", text_dh)
 
     return text_dh
+
+
+
+def c2temp_2(text: str) -> str:
+    """
+    Transform two-words expressions of degrees celsius into '<temp>'.
+    e.g.
+    '° c' -> '<temp>'
+
+    args:
+      - text: a string
+
+    returns:
+      -
+    """
+
+    text_t = re.sub(r"° c", '<temp>', text)
+    text_t = re.sub(r"◦ c", '<temp>', text)
+    return text_t
