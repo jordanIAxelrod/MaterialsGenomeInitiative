@@ -15,7 +15,7 @@ def tt_split_df(df: pd.DataFrame) -> Tuple[pd.DataFrame]:
     X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random_state=11122022) # set random state keeps this the same for everyone
     X_train['label'] = y_train
     X_test['label'] = y_test
-    return (X_train, X_test)
+    return X_train, X_test
 
 trains = []
 tests = []
