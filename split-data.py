@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from typing import Tuple, List
 
-CATEGORIES = ['action', 'constituent', 'null', 'property']
+CATEGORIES = ['action', 'constituent', 'unrelated', 'property']
 
 def make_df_from_txt(filepath: str, label: str) -> pd.DataFrame:
     with open(filepath) as f:
