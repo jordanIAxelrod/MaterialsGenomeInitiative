@@ -6,7 +6,7 @@ class Embeddings:
     def __init__(self, train_data, test_data):
         self.train_data = train_data
         self.test_data = test_data
-        self.full_data = pd.concat([train_data, test_data])
+        self.full_data = pd.concat([train_data, test_data]).apply(lambda x: ' '.join([str(y) for y in x]))
         self.bow = self.create_BOW()
         self.tfidf = self.create_tfidf()
         self.w2v = self.create_w2v()
@@ -26,6 +26,7 @@ class Embeddings:
     def create_tfidf(self):
         vectorizor = TfidfVectorizer()
         vectorizor.fit(self.full_data)
+        return vectorizor
 
     def TFIDF(self):
         """
@@ -55,9 +56,10 @@ class Word2VecVectorizor:
         for sentence in text:
             s = None
             for word in sentence.split():
-                if s is not None:
-                    s += self.word2vec.wv[word]
-                else:
-                    s = self.word2vec.wv[word]
+                if word in self.word2vec.wv:
+                    if s is not None:
+                        s += np.array(self.word2vec.wv[word])
+                    else:
+                        s = np.array(self.word2vec.wv[word])
             w2v.append(s)
         return np.array(w2v)

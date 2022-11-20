@@ -1,0 +1,9 @@
+,vectorizor,kernel,name,F1
+0,TfidfVectorizer(),,lr,0.7841409691629956
+1,CountVectorizer(),,lr,0.8590308370044054
+2,<Embeddings.Word2VecVectorizor object at 0x0000014EB37AB0D0>,,lr,0.7753303964757708
+3,TfidfVectorizer(),rbf,svm,0.7753303964757708
+4,CountVectorizer(),rbf,svm,0.828193832599119
+5,<Embeddings.Word2VecVectorizor object at 0x0000014EB37AB0D0>,rbf,svm,0.8678414096916299
+6,False,,nn,0.8105726872246696
+7,True,,nn,0.8502202643171806

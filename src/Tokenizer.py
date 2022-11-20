@@ -8,7 +8,7 @@ try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
     nltk.download('punkt')
-df = pd.read_csv('./data/train.tsv', sep='\\t')
+# df = pd.read_csv('./data/train.tsv', sep='\\t')
 
 def tokenize_text(text: str) -> List[str]:
     # Saw hyphens like this in the middle of a lot of words e.g. \"transmission elec- tron microscopy\". Seem like line breaks

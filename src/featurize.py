@@ -2,10 +2,7 @@
 Functions that turn index data into features to be fed into classifier models.
 """
 
-
-
 from collections import Counter
-
 
 
 def bow(word_ids: list, vocab_size: int) -> list:
