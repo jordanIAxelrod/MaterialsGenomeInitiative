@@ -25,6 +25,7 @@ class RNN(nn.Module):
             bidirectional=True,
             batch_first=True
         )
+        self.Uw = nn.Parameter(torch.randn(hidden_dim))
         self.mha = nn.MultiheadAttention(hidden_dim, 1, .1, batch_first=True)
 
         self.proj = nn.Linear(hidden_dim, num_classes)
@@ -38,8 +39,8 @@ class RNN(nn.Module):
             if word in embedding.wv:
                 weights[i] = torch.Tensor(embedding.wv[word])
             else:
-                weights[i] = torch.randn(100)
-        weights[-1] = torch.randn(100)
+                weights[i] = torch.randn(self.embed_dim)
+        weights[-1] = torch.randn(self.embed_dim)
         self.embed.weight = torch.nn.Parameter(weights)
 
     def forward(self, X, attn_msk):
@@ -55,7 +56,7 @@ class RNN(nn.Module):
 
         X = self.gru(X)[0]
         X = X[:, :, :self.hidden_dim] + X[:, :, self.hidden_dim:]
-        X = self.mha(X, X, X, key_padding_mask=attn_msk)[0]
+        X = self.mha(self.Uw, X, X, key_padding_mask=attn_msk)[0]
 
         X = self.proj(X)
         X = X.mean(dim=1)
