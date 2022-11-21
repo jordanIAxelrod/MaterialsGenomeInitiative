@@ -25,7 +25,7 @@ class RNN(nn.Module):
             bidirectional=True,
             batch_first=True
         )
-        self.Uw = nn.Parameter(torch.randn(hidden_dim))
+        self.Uw = nn.Parameter(torch.randn(hidden_dim)).reshape(1, 1, -1)
         self.mha = nn.MultiheadAttention(hidden_dim, 1, .1, batch_first=True)
 
         self.proj = nn.Linear(hidden_dim, num_classes)
@@ -53,10 +53,10 @@ class RNN(nn.Module):
 
 
         X = self.embed(X)
-
+        bsz, l, embed_dim = X.shape
         X = self.gru(X)[0]
         X = X[:, :, :self.hidden_dim] + X[:, :, self.hidden_dim:]
-        X = self.mha(self.Uw, X, X, key_padding_mask=attn_msk)[0]
+        X = self.mha(self.Uw.extend(bsz, 1, embed_dim), X, X, key_padding_mask=attn_msk)[0]
 
         X = self.proj(X)
         X = X.mean(dim=1)
