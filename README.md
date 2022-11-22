@@ -4,7 +4,7 @@ This repo is for a joint project between [Jordan Axelrod](https://github.com/jor
 
 ## Installation
 
-You can install the required packages by running `conda env create -n pollydarton --file --from-history>environment.yml`. If you don't have conda installed, you can follow the instructions [here](https://docs.conda.io/en/latest/miniconda.html) to set it up.
+You can install the required packages by running `conda env create -n pollydarton --file env.yml`. If you don't have conda installed, you can follow the instructions [here](https://docs.conda.io/en/latest/miniconda.html) to set it up. This also requires Gensim version 3.8.1 which conda seems to have trouble installing, so within the new conda env, also run `pip3 install gensim==3.8.1`.
 
 **NB:** Due to permissions concerns the `/data` directory is empty. You will want to populate it with data during the installation process. It should look like this:
 
