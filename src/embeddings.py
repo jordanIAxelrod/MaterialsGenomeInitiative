@@ -2,6 +2,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from gensim.models import Word2Vec
 import numpy as np
 import pandas as pd
+import os
 class Embeddings:
     def __init__(self, train_data, test_data):
         self.train_data = train_data
@@ -36,7 +37,9 @@ class Embeddings:
         return self.tfidf
 
     def create_w2v(self):
-        w2v = Word2VecVectorizor('../data/word2vec_embeddings-SNAPSHOT.model')
+        main_dir = os.path.dirname(__file__)
+        w2v_path = os.path.join(main_dir, '../data/word2vec_embeddings-SNAPSHOT.model')
+        w2v = Word2VecVectorizor(w2v_path)
         return w2v
 
     def word2vec(self):

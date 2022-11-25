@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 from gensim.models import Word2Vec
@@ -33,7 +34,9 @@ class RNN(nn.Module):
         self.softmax = nn.Softmax(dim=-1)
 
     def set_embedding_weights(self):
-        embedding = Word2Vec.load('../data/word2vec_embeddings-SNAPSHOT.model')
+        main_dir = os.path.dirname(__file__)
+        w2v_path = os.path.join(main_dir, '../data/word2vec_embeddings-SNAPSHOT.model')
+        embedding = Word2Vec.load(w2v_path)
         weights = torch.zeros(len(self.word_list), self.embed_dim)
         for i, word in enumerate(self.word_list):
             if word in embedding.wv:
