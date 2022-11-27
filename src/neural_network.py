@@ -59,7 +59,7 @@ class RNN(nn.Module):
         bsz, l, embed_dim = X.shape
         X = self.gru(X)[0]
         X = X[:, :, :self.hidden_dim] + X[:, :, self.hidden_dim:]
-        X = self.mha(self.Uw.extend(bsz, 1, embed_dim), X, X, key_padding_mask=attn_msk)[0]
+        X = self.mha(self.Uw.repeat(bsz, 1, 1), X, X, key_padding_mask=attn_msk)[0]
 
         X = self.proj(X)
         X = X.mean(dim=1)
