@@ -1,4 +1,6 @@
 import os
+
+import numpy as np
 import torch
 import torch.nn as nn
 from gensim.models import Word2Vec
@@ -22,7 +24,6 @@ class RNN(nn.Module):
             embed_dim,
             hidden_dim,
             1,
-            dropout=.1,
             bidirectional=True,
             batch_first=True
         )
@@ -40,7 +41,7 @@ class RNN(nn.Module):
         weights = torch.zeros(len(self.word_list), self.embed_dim)
         for i, word in enumerate(self.word_list):
             if word in embedding.wv:
-                weights[i] = torch.Tensor(embedding.wv[word])
+                weights[i] = torch.Tensor(np.array(embedding.wv[word]))
             else:
                 weights[i] = torch.randn(self.embed_dim)
         weights[-1] = torch.randn(self.embed_dim)
@@ -54,13 +55,11 @@ class RNN(nn.Module):
         :return:
         """
 
-
         X = self.embed(X)
         bsz, l, embed_dim = X.shape
         X = self.gru(X)[0]
         X = X[:, :, :self.hidden_dim] + X[:, :, self.hidden_dim:]
-        X = self.mha(self.Uw.repeat(bsz, 1, 1), X, X, key_padding_mask=attn_msk)[0]
-
+        X = self.mha(self.Uw.repeat(bsz, 1, 1), X, X, key_padding_mask=attn_msk.bool())[0]
         X = self.proj(X)
         X = X.mean(dim=1)
         return X
@@ -95,8 +94,6 @@ class NNTrainer:
                 loss = self.loss(pred, y.flatten())
                 test_loss += loss.detach()
             print(f"In epoch {i} the loss was {test_loss}")
-
-
 
     def predict(self, data=None):
         self.nn.eval()

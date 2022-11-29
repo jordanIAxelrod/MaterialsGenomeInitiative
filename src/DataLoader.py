@@ -35,4 +35,4 @@ class TextDataset(Dataset):
         return [int(text[i]) if i < len(text) else self.num_words for i in range(self.max_len)]
 
     def attn_msk(self, text):
-        return [1 if i < len(text) else 0 for i in range(self.max_len)]
+        return [0 if i < len(text) else 1 for i in range(self.max_len)]

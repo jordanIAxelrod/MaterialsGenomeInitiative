@@ -5,7 +5,7 @@ import torch.utils.data
 import embeddings
 import paper_recreation
 import neural_network
-import dataloader
+import DataLoader
 import indexation
 import Tokenizer
 import pandas as pd
@@ -68,8 +68,8 @@ def main():
         }
     )
     # create dataloaders for nn
-    train_set = dataloader.TextDataset(train, max_len, num_words)
-    test_set = dataloader.TextDataset(test, max_len, num_words)
+    train_set = DataLoader.TextDataset(train, max_len, num_words)
+    test_set = DataLoader.TextDataset(test, max_len, num_words)
     train_loader = torch.utils.data.DataLoader(train_set, batch_size=10, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_set, batch_size=100, shuffle=False)
     nn_embed = neural_network.RNN(4, 50, num_words, 100, False, word_types)
