@@ -94,7 +94,7 @@ def main():
 
     paper_replicator = paper_recreation.PaperReplicator(train, test, nn_trainer_e, nn_trainer_w)
     results = paper_replicator.create_results(experiments)
-    results.to_csv('../results/results.csv')
+    results.to_csv(os.path.join(main_dir, '../results/results.csv'))
 if __name__=='__main__':
     main()
 
