@@ -106,12 +106,15 @@ class NNTrainer:
             return pred
         return self.nn(data)
 
-    def make_heatmap(self, sentence, msk, path):
+    def make_heatmap(self, sentence, msk, path, title):
         weights = self.nn(sentence, msk)[1]
         words = [self.nn.word_list[word] for i, word in enumerate(sentence[0]) if not msk[0, i]]
         print(words)
         print(weights)
+        fig, ax = plt.subplots(figsize=(11, 3))
         weights = weights.squeeze()[: len(words)].reshape(-1, len(words) // 3)
         words = [words[: len(words) // 3], words[len(words) // 3: len(words) * 2 // 3], words[len(words) * 2// 3:]]
-        heat_map = sns.heatmap(weights.detach(), annot=words, fmt='')
-        plt.savefig(path)
+        heat_map = sns.heatmap(weights.detach(), ax=ax, annot=words, cmap=sns.color_palette("light:b", as_cmap=True), fmt='',linewidths=1, xticklabels=False, yticklabels=False)
+        ax.set_title(title)
+        fig.savefig(path)
+        plt.show()

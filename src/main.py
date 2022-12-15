@@ -77,7 +77,7 @@ def main():
     nn_w2v.set_embedding_weights()
     nn_trainer_e = neural_network.NNTrainer(
         nn_embed,
-        5,
+        10,
         torch.optim.Adam,
         torch.nn.CrossEntropyLoss(),
         train_loader,
@@ -85,7 +85,7 @@ def main():
     )
     nn_trainer_w = neural_network.NNTrainer(
         nn_w2v,
-        5,
+        10,
         torch.optim.Adam,
         torch.nn.CrossEntropyLoss(),
         train_loader,
@@ -102,12 +102,14 @@ def main():
     nn_trainer_w.make_heatmap(
         test_set[example][0].unsqueeze(0),
         test_set[example][1].unsqueeze(0),
-        '../results/W2V attention heatmap.png'
+        '../results/W2V attention heatmap.png',
+        "Attention Weights for Pretrained W2V Embeddings"
     )
     nn_trainer_e.make_heatmap(
         test_set[example][0].unsqueeze(0),
         test_set[example][1].unsqueeze(0),
-        '../results/Learnt Embedding attention heatmap.png'
+        '../results/Learnt Embedding attention heatmap.png',
+        "Attention Weights For Learnt Embeddings"
     )
 if __name__=='__main__':
     main()
