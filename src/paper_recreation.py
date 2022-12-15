@@ -1,8 +1,27 @@
 import pandas as pd
 import torch
+import numpy as np
+
 from sklearn.metrics import f1_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.preprocessing import StandardScaler
+
+from scipy.stats import uniform
+from scipy.sparse._csr import csr_matrix
+
+
+SVM_GRID = {
+    'C': uniform(1e-4, 1e4),
+    'gamma': uniform(1e-5, 1),
+    'class_weight': [None, 'balanced']
+}
+
+LR_GRID = {
+    'C': uniform(0.001, 1000),
+     'class_weight': [None, 'balanced']
+}
 
 
 class PaperReplicator:
@@ -39,9 +58,15 @@ class PaperReplicator:
             print(experiments.loc[_, :])
         return experiments
 
+    def tune_model(self, model, grid, X, y): 
+        model_grid = RandomizedSearchCV(model, grid, refit=True, n_jobs=-1, scoring='f1_micro')
+        model_grid.fit(X, y)
+        return model_grid
+
     def run_svm(self, kernel, data):
         train_data, test_data = data
         svm = SVC(kernel=kernel)
+        # tuned_svm = self.tune_model(svm, SVM_GRID, train_data, self.train_data['label'])
         svm.fit(train_data, self.train_data['label'])
         test_pred = svm.predict(test_data)
         return test_pred
@@ -49,7 +74,8 @@ class PaperReplicator:
     def run_lr(self, data):
         train_data, test_data = data
 
-        lr = LogisticRegression(max_iter=300)
+        lr = LogisticRegression(max_iter=3000)
+        # tuned_lr = self.tune_model(lr, LR_GRID, train_data, self.train_data['label'])
         lr.fit(train_data, self.train_data['label'])
         test_pred = lr.predict(test_data)
         return test_pred
@@ -74,11 +100,20 @@ class PaperReplicator:
 
         return test_pred
 
+    def build_scalar(self, train, test):
+        total = np.concatenate((train, test))
+        return StandardScaler().fit(total)
+
+    def embed_set(self, embedding, X):
+        embedded_text = embedding.transform(X.text.apply(lambda x: ' '.join([str(y) for y in x])))
+        if type(embedded_text) == csr_matrix:
+            embedded_text = np.asarray(embedded_text.todense())
+        return embedded_text
+
     def embed(self, embedding):
-        return embedding.transform(
-            self.train_data.text.apply(lambda x: ' '.join([str(y) for y in x]))
-        ), embedding.transform(
-            self.test_data.text.apply(lambda x: ' '.join([str(y) for y in x]))
-        )
+        embedded_train = self.embed_set(embedding, self.train_data)
+        embedded_test = self.embed_set(embedding, self.test_data)
+        scalar = self.build_scalar(embedded_train, embedded_test)
+        return  (scalar.transform(embedded_train), scalar.transform(embedded_test))
 
 

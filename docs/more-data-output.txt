@@ -1,0 +1,88 @@
+lr
+vectorizor    TfidfVectorizer()
+kernel                     None
+name                         lr
+F1                     0.790654
+Name: 0, dtype: object
+lr
+vectorizor    CountVectorizer()
+kernel                     None
+name                         lr
+F1                     0.812461
+Name: 1, dtype: object
+lr
+vectorizor    <embeddings.Word2VecVectorizor object at 0x7fc...
+kernel                                                     None
+name                                                         lr
+F1                                                      0.76947
+Name: 2, dtype: object
+svm
+vectorizor    TfidfVectorizer()
+kernel                  sigmoid
+name                        svm
+F1                     0.793146
+Name: 3, dtype: object
+svm
+vectorizor    CountVectorizer()
+kernel                  sigmoid
+name                        svm
+F1                     0.744548
+Name: 4, dtype: object
+svm
+vectorizor    <embeddings.Word2VecVectorizor object at 0x7fc...
+kernel                                                  sigmoid
+name                                                        svm
+F1                                                     0.633022
+Name: 5, dtype: object
+nn
+In epoch 0 the loss was 7.207212924957275
+In epoch 1 the loss was 6.759908676147461
+In epoch 2 the loss was 7.576403617858887
+In epoch 3 the loss was 7.76845121383667
+In epoch 4 the loss was 9.442703247070312
+In epoch 5 the loss was 10.825719833374023
+In epoch 6 the loss was 12.213693618774414
+In epoch 7 the loss was 13.13734245300293
+In epoch 8 the loss was 16.067432403564453
+In epoch 9 the loss was 14.79287338256836
+In epoch 10 the loss was 13.789871215820312
+In epoch 11 the loss was 14.710869789123535
+In epoch 12 the loss was 15.256046295166016
+In epoch 13 the loss was 16.972124099731445
+In epoch 14 the loss was 13.928752899169922
+In epoch 15 the loss was 14.468902587890625
+In epoch 16 the loss was 13.017900466918945
+In epoch 17 the loss was 14.126953125
+In epoch 18 the loss was 14.411298751831055
+In epoch 19 the loss was 15.109081268310547
+vectorizor       False
+kernel            None
+name                nn
+F1            0.876012
+Name: 6, dtype: object
+nn
+In epoch 0 the loss was 19.612634658813477
+In epoch 1 the loss was 14.308456420898438
+In epoch 2 the loss was 14.748730659484863
+In epoch 3 the loss was 17.27465057373047
+In epoch 4 the loss was 15.277595520019531
+In epoch 5 the loss was 15.146076202392578
+In epoch 6 the loss was 13.8495454788208
+In epoch 7 the loss was 15.344983100891113
+In epoch 8 the loss was 15.945441246032715
+In epoch 9 the loss was 17.6730899810791
+In epoch 10 the loss was 16.072355270385742
+In epoch 11 the loss was 17.35747528076172
+In epoch 12 the loss was 15.716649055480957
+In epoch 13 the loss was 15.470382690429688
+In epoch 14 the loss was 13.680136680603027
+In epoch 15 the loss was 15.302640914916992
+In epoch 16 the loss was 15.709795951843262
+In epoch 17 the loss was 14.25908088684082
+In epoch 18 the loss was 13.455534934997559
+In epoch 19 the loss was 13.811063766479492
+vectorizor        True
+kernel            None
+name                nn
+F1            0.875389
+Name: 7, dtype: object
