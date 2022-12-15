@@ -1,9 +1,9 @@
 ,vectorizor,kernel,name,F1
-0,TfidfVectorizer(),,lr,0.7906542056074768
-1,CountVectorizer(),,lr,0.8124610591900312
-2,<embeddings.Word2VecVectorizor object at 0x7fcba0ebfeb0>,,lr,0.7694704049844237
-3,TfidfVectorizer(),sigmoid,svm,0.793146417445483
-4,CountVectorizer(),sigmoid,svm,0.7445482866043613
-5,<embeddings.Word2VecVectorizor object at 0x7fcba0ebfeb0>,sigmoid,svm,0.6330218068535826
-6,False,,nn,0.8760124610591901
-7,True,,nn,0.8753894080996885
+0,TfidfVectorizer(),,lr,0.7841409691629956
+1,CountVectorizer(),,lr,0.8590308370044054
+2,<embeddings.Word2VecVectorizor object at 0x0000012F2E7AF3A0>,,lr,0.7753303964757708
+3,TfidfVectorizer(),rbf,svm,0.7753303964757708
+4,CountVectorizer(),rbf,svm,0.828193832599119
+5,<embeddings.Word2VecVectorizor object at 0x0000012F2E7AF3A0>,rbf,svm,0.8678414096916299
+6,False,,nn,0.8634361233480177
+7,True,,nn,0.8898678414096917

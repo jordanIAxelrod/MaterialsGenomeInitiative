@@ -43,30 +43,13 @@ def put_decimal_together(w: str) -> str:
       - w or '<dec>'
     """
 
-    if re.fullmatch(r"[0-9]+\.[0-9]+", w) is None:
+    """
+    if re.fullmatch(r"[0-9]+(\.[0-9]+)?:[0-9]+(\.[0-9]+)?", w) is None:
         return w
     else:
         return '<dec>'
-
-
-
-def put_ratio_together(w: str) -> str:
     """
-    Transform a ratio expressed as a string into '<ratio>'.
-    e.g.
-    '1:1' -> '<ratio>'
-
-    args:
-      - w: a string (word)
-
-    returns:
-      - w or '<ratio>'
-    """
-
-    if re.fullmatch(r"[0-9]+:[0-9]+", w) is None:
-        return w
-    else:
-        return '<ratio>'
+    return re.sub(r"[0-9]+\.[0-9]+", "<dec>", w)
 
 
 
@@ -90,18 +73,18 @@ def c2temp(w: str) -> str:
 
 
 
-def split_slash(w: str) -> List[str]:
+def split_slash(w: str) -> str:
     """
     Split unit expression into parts.
     e.g.
-    'g/mol' -> ['g', '/', 'mol']
-    'and/or' -> ['and', '/', 'or']
+    'g/mol' -> 'g / mol'
+    'and/or' -> 'and / or'
 
     args:
       - w: a string (word)
 
     returns:
-      - a list of substrings of w
+      - a string
     """
 
     subs = w.split('/')
@@ -110,4 +93,4 @@ def split_slash(w: str) -> List[str]:
         l.append(sub)
         l.append('/')
     l.pop(-1)
-    return l
+    return " ".join(l)

@@ -4,8 +4,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 from gensim.models import Word2Vec
-
-
+import seaborn as sns
+import matplotlib.pyplot as plt
 class RNN(nn.Module):
 
     def __init__(self, num_classes: int, hidden_dim: int, num_words: int, embed_dim: int, to_embed: bool,
@@ -38,7 +38,7 @@ class RNN(nn.Module):
         main_dir = os.path.dirname(__file__)
         w2v_path = os.path.join(main_dir, '../data/word2vec_embeddings-SNAPSHOT.model')
         embedding = Word2Vec.load(w2v_path)
-        weights = torch.zeros(len(self.word_list), self.embed_dim)
+        weights = torch.zeros(len(self.word_list) + 1, self.embed_dim)
         for i, word in enumerate(self.word_list):
             if word in embedding.wv:
                 weights[i] = torch.Tensor(np.array(embedding.wv[word]))
@@ -59,10 +59,10 @@ class RNN(nn.Module):
         bsz, l, embed_dim = X.shape
         X = self.gru(X)[0]
         X = X[:, :, :self.hidden_dim] + X[:, :, self.hidden_dim:]
-        X = self.mha(self.Uw.repeat(bsz, 1, 1), X, X, key_padding_mask=attn_msk.bool())[0]
+        X, weights = self.mha(self.Uw.repeat(bsz, 1, 1), X, X, key_padding_mask=attn_msk.bool())
         X = self.proj(X)
         X = X.mean(dim=1)
-        return X
+        return X, weights
 
 
 class NNTrainer:
@@ -82,7 +82,7 @@ class NNTrainer:
             for j, (x, msk, y) in enumerate(self.train_loader):
                 self.optimizer.zero_grad()
 
-                pred = self.nn(x, msk)
+                pred = self.nn(x, msk)[0]
                 loss = self.loss(pred, y.flatten())
                 loss.backward()
                 train_loss += loss.detach()
@@ -90,7 +90,7 @@ class NNTrainer:
             test_loss = 0
             self.nn.eval()
             for j, (x, msk, y) in enumerate(self.test_loader):
-                pred = self.nn(x, msk)
+                pred = self.nn(x, msk)[0]
                 loss = self.loss(pred, y.flatten())
                 test_loss += loss.detach()
             print(f"In epoch {i} the loss was {test_loss}")
@@ -101,7 +101,17 @@ class NNTrainer:
             pred = []
 
             for j, (x, attn, y) in enumerate(self.test_loader):
-                pred.append(self.nn(x, attn))
+                pred.append(self.nn(x, attn)[0])
             pred = torch.cat(pred, dim=0)
             return pred
         return self.nn(data)
+
+    def make_heatmap(self, sentence, msk, path):
+        weights = self.nn(sentence, msk)[1]
+        words = [self.nn.word_list[word] for i, word in enumerate(sentence[0]) if not msk[0, i]]
+        print(words)
+        print(weights)
+        weights = weights.squeeze()[: len(words)].reshape(-1, len(words) // 3)
+        words = [words[: len(words) // 3], words[len(words) // 3: len(words) * 2 // 3], words[len(words) * 2// 3:]]
+        heat_map = sns.heatmap(weights.detach(), annot=words, fmt='')
+        plt.savefig(path)
