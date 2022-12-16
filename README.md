@@ -25,7 +25,7 @@ The `split-data.py` file can also deterministically turn raw labeled data into a
 
 
 ## Adding Dependencies
-Dependencies can be installed using conda or vanilla python venv
+Dependencies can be installed using conda or vanilla python venv. Python 3.8 was used for this project. You may experience issues with newer versions of python due to incompatibility with older packages.
 ### Conda
 You can install the required packages by running `conda env create -n pollydarton --file env.yml`. If you don't have conda installed, you can follow the instructions [here](https://docs.conda.io/en/latest/miniconda.html) to set it up. This also requires Gensim version 3.8.1 which conda seems to have trouble installing, so within the new conda env, also run `pip3 install gensim==3.8.1`.
 
@@ -48,9 +48,9 @@ Install the necessary packages. The `--no-binary` arg is required for `gensim` b
 ```
 $ pip install --no-binary gensim -r requirements.txt
 ```
-Install Jupyter kernal for `venv` and select the `venv` kernel for running notebooks
+Install Jupyter kernal for `env` and select the `env` kernel for running notebooks
 ```
-$ ipython kernel install --user --name=venv
+$ ipython kernel install --user --name=env
 ```
 
 
