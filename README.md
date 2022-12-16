@@ -26,4 +26,42 @@ MaterialsGenomeInitiative
 The code in `split-data.py` will (deterministically) turn this raw data into a pair of TSV files (one for training, one for testing) which can be used. 
 
 ### Adding Dependencies
+Dependencies can be installed using conda or vanilla python venv
+<br><br>
+### Conda
 If you need to add any dependencies, make sure to update the `environment.yml` file so that everyone has access to them. After adding a dependency with `conda install ...` you can do this by running `conda env export --from-history>environment.yml` and committing the new file to git.
+<br><br>
+### Python venv
+First, set the repo as your working directory. 
+```
+$ cd MaterialsGenomeInitiative
+```
+Create a python venv directory if you don't alredy have one
+```
+$ python -m venv env
+```
+Activate the venv
+```
+$ source ./env/bin/activate
+```
+Install the necessary packages. The `--no-binary` arg is required for `gensim` because the version of `gensim` required does not build with modern versions of clang.
+```
+$ pip install --no-binary gensim -r requirements.txt
+```
+Install Jupyter kernal for `venv` and select the `venv` kernel for running notebooks
+```
+$ ipython kernel install --user --name=venv
+```
+
+<br>
+## Running Code
+
+### Reproduction Models
+
+### RoBERTa
+
+Run all cells starting at "Imports" section in `src/roberta.ipynb`. Please note that this will take some time if not using a GPU or other high performance compute system.
+
+### SciBERT, MatSciBERT, MatBERT
+
+### Random Forest, XGBoost, LSTM
