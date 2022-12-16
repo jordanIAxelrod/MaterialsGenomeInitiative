@@ -52,8 +52,7 @@ Install Jupyter kernal for `venv` and select the `venv` kernel for running noteb
 ```
 $ ipython kernel install --user --name=venv
 ```
-
-<br>
+<br><br>
 ## Running Code
 
 ### Reproduction Models
