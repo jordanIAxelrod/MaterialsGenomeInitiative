@@ -1,6 +1,6 @@
 # Materials Genome Initiative: NLP Informatics
 
-This repo is for a joint project between [Jordan Axelrod](https://github.com/jordanIAxelrod), Defne Circi, [Logan Cooper](https://github.com/ldtcooper), Thomas Lilly, and Shota Miki. It is an attempt to apply NLP techniques to apply sentence-level classifications to materials science papers to make the data contained in them more available to the scientific community. 
+This repo is for a joint project between [Jordan Axelrod](https://github.com/jordanIAxelrod), Defne Circi, [Logan Cooper](https://github.com/ldtcooper), Thomas Lilly, and Shota Miki. It is an attempt to apply NLP techniques to apply sentence-level classifications to materials science papers to make the data contained in them more available to the scientific community.
 
 ## Installation
 
@@ -23,7 +23,7 @@ MaterialsGenomeInitiative
 |   split-data.py
 ```
 
-The code in `split-data.py` will (deterministically) turn this raw data into a pair of TSV files (one for training, one for testing) which can be used. 
+The code in `split-data.py` will (deterministically) turn this raw data into a pair of TSV files (one for training, one for testing) which can be used.
 
 ### Adding Dependencies
 Dependencies can be installed using conda or vanilla python venv
@@ -32,7 +32,7 @@ Dependencies can be installed using conda or vanilla python venv
 If you need to add any dependencies, make sure to update the `environment.yml` file so that everyone has access to them. After adding a dependency with `conda install ...` you can do this by running `conda env export --from-history>environment.yml` and committing the new file to git.
 <br><br>
 ### Python venv
-First, set the repo as your working directory. 
+First, set the repo as your working directory.
 ```
 $ cd MaterialsGenomeInitiative
 ```
@@ -63,7 +63,7 @@ The basic reproduction can be done by running `python3 main.py` **from within th
 
 #### Testing the rule-based model
 The code to test the rule-based model against the original data is in `prototyping.ipynb` in the section titled "Testing Rule Model". The code to run the rule-based model itself is in `new-sentence-labelling.py`.
-  
+
 ### RoBERTa
 
 Run all cells starting at "Imports" section in `src/roberta.ipynb`. Please note that this will take some time if not using a GPU or other high performance compute system.
@@ -71,3 +71,4 @@ Run all cells starting at "Imports" section in `src/roberta.ipynb`. Please note 
 ### SciBERT, MatSciBERT, MatBERT
 
 ### Random Forest, XGBoost, LSTM
+Run all cells in `src/preprocessing_additional_models.ipynb`. To avoid preprocessing, comment out cells under sections named "Preprocess".
