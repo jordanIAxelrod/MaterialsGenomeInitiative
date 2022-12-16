@@ -66,18 +66,18 @@ class PaperReplicator:
     def run_svm(self, kernel, data):
         train_data, test_data = data
         svm = SVC(kernel=kernel)
-        # tuned_svm = self.tune_model(svm, SVM_GRID, train_data, self.train_data['label'])
-        svm.fit(train_data, self.train_data['label'])
-        test_pred = svm.predict(test_data)
+        tuned_svm = self.tune_model(svm, SVM_GRID, train_data, self.train_data['label'])
+        tuned_svm.fit(train_data, self.train_data['label'])
+        test_pred = tuned_svm.predict(test_data)
         return test_pred
 
     def run_lr(self, data):
         train_data, test_data = data
 
         lr = LogisticRegression(max_iter=3000)
-        # tuned_lr = self.tune_model(lr, LR_GRID, train_data, self.train_data['label'])
-        lr.fit(train_data, self.train_data['label'])
-        test_pred = lr.predict(test_data)
+        tuned_lr = self.tune_model(lr, LR_GRID, train_data, self.train_data['label'])
+        tuned_lr.fit(train_data, self.train_data['label'])
+        test_pred = tuned_lr.predict(test_data)
         return test_pred
 
     def run_NN(self, num, data):
