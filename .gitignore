@@ -1,5 +1,7 @@
 # Custom
-/data/*
+/data/*.tsv
+/data/*.sh
+/data/raw
 .vscode
 
 # Byte-compiled / optimized / DLL files
