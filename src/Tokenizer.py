@@ -12,7 +12,7 @@ except LookupError:
 
 def tokenize_text(text: str) -> List[str]:
     # Saw hyphens like this in the middle of a lot of words e.g. \"transmission elec- tron microscopy\". Seem like line breaks
-    text = re.sub(r'([a-z])- ([a-z])', '\\1\\2', text)
+    # text = re.sub(r'([a-z])- ([a-z])', '\\1\\2', text) # this was moved to preprocessing
     return nltk.tokenize.word_tokenize(text)
 
 "pd.DataFrame([(tokenize_text(t),l) for t,l in df.to_records(index=False)], columns=df.columns)"

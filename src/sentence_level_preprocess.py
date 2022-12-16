@@ -2,9 +2,14 @@
 Functions that conduct sentence level preprocessing, which requires information of more than unigrams.
 """
 
-
-
 import re
+from typing import List, Tuple
+from word_level_preprocess import *
+from indexation import *
+import nltk
+import itertools
+
+numpy_records = List[Tuple]
 
 
 
@@ -22,7 +27,6 @@ def rm_linebreaks(text: str, p=False) -> str:
     returns:
       - text_dh: a string dehyphenated
     """
-
     text_dh = re.sub(r"([a-z])- ([a-z])", r"\1\2", text)
 
     if p and text != text_dh:

@@ -1,4 +1,5 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.preprocessing import StandardScaler
 from gensim.models import Word2Vec
 import numpy as np
 import pandas as pd

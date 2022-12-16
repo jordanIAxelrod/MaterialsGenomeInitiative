@@ -10,7 +10,7 @@ import indexation
 import Tokenizer
 import pandas as pd
 
-
+from sentence_level_preprocess import preprocess
 
 def main():
     main_dir = os.path.dirname(__file__)
@@ -18,10 +18,14 @@ def main():
     test_path = os.path.join(main_dir, '../data/test.tsv')
     train = pd.read_csv(train_path, sep='\t')
     test = pd.read_csv(test_path, sep='\t')
-    train.text = train.text.apply(Tokenizer.tokenize_text)
-    test.text = test.text.apply(Tokenizer.tokenize_text)
 
-    # Add more preprocessing here
+    # preprocessing
+    train = pd.DataFrame(preprocess(train.to_records(index=False)), columns=train.columns)
+    test = pd.DataFrame(preprocess(test.to_records(index=False)), columns=test.columns)
+
+    # tokenize
+    train.text = train.text.str.join(' ').apply(Tokenizer.tokenize_text)
+    test.text = test.text.str.join(' ').apply(Tokenizer.tokenize_text)
 
 
     # continue script
@@ -49,9 +53,9 @@ def main():
                 None,
                 None,
                 None,
-                'rbf',
-                'rbf',
-                'rbf',
+                'sigmoid',
+                'sigmoid',
+                'sigmoid',
                 None,
                 None
             ],
@@ -77,7 +81,7 @@ def main():
     nn_w2v.set_embedding_weights()
     nn_trainer_e = neural_network.NNTrainer(
         nn_embed,
-        10,
+        20,
         torch.optim.Adam,
         torch.nn.CrossEntropyLoss(),
         train_loader,
@@ -85,7 +89,7 @@ def main():
     )
     nn_trainer_w = neural_network.NNTrainer(
         nn_w2v,
-        10,
+        20,
         torch.optim.Adam,
         torch.nn.CrossEntropyLoss(),
         train_loader,
