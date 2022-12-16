@@ -60,6 +60,9 @@ The basic reproduction can be done by running `python3 main.py` **from within th
 - Preprocessing: Run `python3 main.py` from the `preprocessing` branch [here](https://github.com/jordanIAxelrod/MaterialsGenomeInitiative/tree/preprocessing).
 - Preprocessing + Hyperparameter Tuning: Run `python3 main.py` from the `tuning` branch [here](https://github.com/jordanIAxelrod/MaterialsGenomeInitiative/tree/tuning).
 - Preprocessing + Extra Data: Run `python3 main.py` from the `extra-data` branch [here](https://github.com/jordanIAxelrod/MaterialsGenomeInitiative/tree/extra-data).
+
+#### Testing the rule-based model
+The code to test the rule-based model against the original data is in `prototyping.ipynb` in the section titled "Testing Rule Model". The code to run the rule-based model itself is in `new-sentence-labelling.py`.
   
 ### RoBERTa
 
