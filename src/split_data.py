@@ -17,21 +17,22 @@ def tt_split_df(df: pd.DataFrame) -> Tuple[pd.DataFrame]:
     X_test['label'] = y_test
     return X_train, X_test
 
-trains = []
-tests = []
-for name in CATEGORIES:
-    df = make_df_from_txt(f'./data/raw/{name}.txt', name)
-    df.dropna(axis=0, inplace=True)
-    tr, ts = tt_split_df(df)
-    trains.append(tr)
-    tests.append(ts)
+if __name__ == "__main__":
+    trains = []
+    tests = []
+    for name in CATEGORIES:
+        df = make_df_from_txt(f'./data/raw/{name}.txt', name)
+        df.dropna(axis=0, inplace=True)
+        tr, ts = tt_split_df(df)
+        trains.append(tr)
+        tests.append(ts)
 
-tr = pd.concat(trains)
-ts = pd.concat(tests)
+    tr = pd.concat(trains)
+    ts = pd.concat(tests)
 
-# there are a few empty strings in here
-ts = ts[ts.text != '']
-tr = tr[tr.text != '']
+    # there are a few empty strings in here
+    ts = ts[ts.text != '']
+    tr = tr[tr.text != '']
 
-tr.to_csv('./data/train.tsv', sep='\t', index=False)
-ts.to_csv('./data/test.tsv', sep='\t', index=False)
+    tr.to_csv('./data/train.tsv', sep='\t', index=False)
+    ts.to_csv('./data/test.tsv', sep='\t', index=False)
