@@ -56,7 +56,11 @@ $ ipython kernel install --user --name=venv
 ## Running Code
 
 ### Reproduction Models
-
+The basic reproduction can be done by running `python3 main.py` **from within the `/src` directory**. Running the code for the preprocessing, tuning, and extra data segments requires changing branches.
+- Preprocessing: Run `python3 main.py` from the `preprocessing` branch [here](https://github.com/jordanIAxelrod/MaterialsGenomeInitiative/tree/preprocessing).
+- Preprocessing + Hyperparameter Tuning: Run `python3 main.py` from the `tuning` branch [here](https://github.com/jordanIAxelrod/MaterialsGenomeInitiative/tree/tuning).
+- Preprocessing + Extra Data: Run `python3 main.py` from the `extra-data` branch [here](https://github.com/jordanIAxelrod/MaterialsGenomeInitiative/tree/extra-data).
+  
 ### RoBERTa
 
 Run all cells starting at "Imports" section in `src/roberta.ipynb`. Please note that this will take some time if not using a GPU or other high performance compute system.
