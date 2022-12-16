@@ -14,8 +14,8 @@ from sentence_level_preprocess import preprocess
 
 def main():
     main_dir = os.path.dirname(__file__)
-    train_path = os.path.join(main_dir, '../data/train.tsv')
-    test_path = os.path.join(main_dir, '../data/test.tsv')
+    train_path = os.path.join(main_dir, '../data/new-train.tsv')
+    test_path = os.path.join(main_dir, '../data/new-test.tsv')
     train = pd.read_csv(train_path, sep='\t')
     test = pd.read_csv(test_path, sep='\t')
 
