@@ -1,6 +1,6 @@
 # Materials Genome Initiative: NLP Informatics
 
-This repo is for a joint project between [Jordan Axelrod](https://github.com/jordanIAxelrod), Defne Çirci, [Logan Cooper](https://github.com/ldtcooper), Thomas Lilly, and Shota Miki. It is an attempt to apply NLP techniques to apply sentence-level classifications to materials science papers to make the data contained in them more available to the scientific community.
+This repo is for a joint project between [Jordan Axelrod](https://github.com/jordanIAxelrod), [Defne Çirci](https://github.com/defnecirci), [Logan Cooper](https://github.com/ldtcooper), Thomas Lilly, and Shota Miki. It is an attempt to apply NLP techniques to apply sentence-level classifications to materials science papers to make the data contained in them more available to the scientific community.
 
 ## Installation
 Due to permissions concerns the `/data` directory is empty. Please copy the provided `test.tsv` and `train.tsv` in the `data` directory as shown below. 
