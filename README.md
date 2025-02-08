@@ -86,3 +86,15 @@ Run all cells in `src/Sci_Bert_Models.ipynb` for train and test results.
 
 ### Random Forest, XGBoost, LSTM
 Run all cells in `src/preprocessing_additional_models.ipynb`. To avoid preprocessing, comment out cells under sections named "Preprocess".
+
+
+## Citation
+
+If you use this work, please cite:
+
+```bibtex
+@article{axelrodpollydarton,
+  title={POLLYDARTON--NLP-DRIVEN DATA CURATION FOR POLYMER NANOCOMPOSITE DATA RESOURCE},
+  author={Axelrod, Jordan and Circi, Defne and Cooper, Logan and Lilly, Thomas and Miki, Shota}
+}
+```
